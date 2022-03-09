@@ -31,4 +31,21 @@ requiring an extra document or excessive commenting in the code.
 
 ```
 
+##  Cleaning up
 
+One of the major issues I have noticed with my work is poor folder and file organization. 
+There is a substatial amount of time wasted in attempting to find a program, some data, or 
+the most recent version of a manuscript. I have take some steps to mitegate this issue 
+by reorganizing my folder and also including the manuscripts in my OSF repository. 
+
+Below is a screen shot of my folder for this project before cleaning
+![alternate image ](Images\Haptic_Search_Folder_before.jpg)
+
+
+During cleaning 
+
+![alternate image ](Images\Haptic_Search_Folder_During.jpg)
+
+and again after cleaning 
+
+![alternate image ](Images\Haptic_Search_Folder_after.jpg)
