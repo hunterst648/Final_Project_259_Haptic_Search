@@ -1,0 +1,34 @@
+---
+title: "PSYC 259 Final"
+author: "Hunter B Sturgill"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: True
+    toc_float: True
+    code_folding: hide
+    
+    
+
+---
+# Reproducibility 
+In this section I will show steps I have taken to make my work easier to share
+and increase its reproducibility.
+
+##  Open Source 
+I have create an OSF repository to help increase transparency and fidelity of 
+my project. 
+
+One of the major issues with my previous technique was that I had all raw data 
+stored as a matrix of numbers. This matrix was accompanied by an extra document 
+that was required to understand what each column represented with respect to the
+experiment. To fix this I wrote a short MatLab code that converts the raw data matrix
+into a table with column headers that should prove easy to understand without 
+requiring an extra document or excessive commenting in the code. 
+
+
+```{r}
+
+```
+
+
