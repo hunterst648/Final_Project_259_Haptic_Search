@@ -28,6 +28,25 @@ requiring an extra document or excessive commenting in the code.Additionally, th
 code shows good use of for loop to reduce the possibility of error in copying and 
 pasting many times over. 
 
+I also discovered how to read in data from a cloud storage which I did not know how
+to do until taking this course. This will greatly reduce my chances of error when shuffling 
+data from place to place and will allow me to be able to write programs that are more easily shared. 
+For example previous data analysis programs have required multiple `data_home` variables for each of the collaborators on the project 
+
+An example from a previous experiment below. 
+```
+ProgramHome=['C:\Users\hunter\Documents\Pacing Experiment'];
+cd(ProgramHome)
+% DataHome=['C:\Users\David\Documents\Pacing Experiment\Prelim data\'];
+% DataHome=['C:\Users\hunter\Documents\Pacing Experiment\Natural Pace'];
+%  DataHome=["C:\Users\Iman\Documents\Pacing Experiment\Data"]; % Experiment 2
+DataHome=["C:\Users\User\Documents\Pacing Experiment\Data Experiment 3\All_Data"] %Experiment 3
+cd(DataHome)
+```
+Switching directories can be eliminated if each of us are using the same repository instead of just downloading all of the data 
+
+
+Below is code for reading in the data for cleaning
 
 ```
 data_home= ("G:\Shared drives\Haptic Search Group Winter 2022\Experiment 2 Data_NVP")
@@ -71,7 +90,9 @@ Data_table = array2table(DS_clean,"VariableNames",titles)
 writetable(Data_table,'NVP_Clean_Data.csv')
 
 ```
-The entire program can be found on my OSF page for this project. 
+The entire program can be found on my OSF page for this project [Haptic Search](https://osf.io/t23g4/?view_only=8540c0350e67422a9d49afd39c901c63)
+in the programs folder. 
+
 
 ##  Cleaning up
 

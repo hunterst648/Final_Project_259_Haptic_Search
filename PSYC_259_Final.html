@@ -267,6 +267,17 @@ div.tocify {
 <h2>Open Source</h2>
 <p>I have create an OSF repository to help increase transparency and fidelity of my project.</p>
 <p>One of the major issues with my previous technique was that I had all raw data stored as a matrix of numbers. This matrix was accompanied by an extra document that was required to understand what each column represented with respect to the experiment. To fix this I wrote a short MatLab program that converts the raw data matrix into a table with column headers that should prove easy to understand without requiring an extra document or excessive commenting in the code.Additionally, this code shows good use of for loop to reduce the possibility of error in copying and pasting many times over.</p>
+<p>I also discovered how to read in data from a cloud storage which I did not know how to do until taking this course. This will greatly reduce my chances of error when shuffling data from place to place and will allow me to be able to write programs that are more easily shared. For example previous data analysis programs have required multiple <code>data_home</code> variables for each of the collaborators on the project</p>
+<p>An example from a previous experiment below.</p>
+<pre><code>ProgramHome=[&#39;C:\Users\hunter\Documents\Pacing Experiment&#39;];
+cd(ProgramHome)
+% DataHome=[&#39;C:\Users\David\Documents\Pacing Experiment\Prelim data\&#39;];
+% DataHome=[&#39;C:\Users\hunter\Documents\Pacing Experiment\Natural Pace&#39;];
+%  DataHome=[&quot;C:\Users\Iman\Documents\Pacing Experiment\Data&quot;]; % Experiment 2
+DataHome=[&quot;C:\Users\User\Documents\Pacing Experiment\Data Experiment 3\All_Data&quot;] %Experiment 3
+cd(DataHome)</code></pre>
+<p>Switching directories can be eliminated if each of us are using the same repository instead of just downloading all of the data</p>
+<p>Below is code for reading in the data for cleaning</p>
 <pre><code>data_home= (&quot;G:\Shared drives\Haptic Search Group Winter 2022\Experiment 2 Data_NVP&quot;)
 program_home=( &quot;C:\Users\hunte\OneDrive\Documents\MATLAB&quot; )
 Data=[];
@@ -296,7 +307,7 @@ end</code></pre>
 Data_table = array2table(DS_clean,&quot;VariableNames&quot;,titles)
 writetable(Data_table,&#39;NVP_Clean_Data.csv&#39;)
 </code></pre>
-<p>The entire program can be found on my OSF page for this project.</p>
+<p>The entire program can be found on my OSF page for this project <a href="https://osf.io/t23g4/?view_only=8540c0350e67422a9d49afd39c901c63">Haptic Search</a> in the programs folder.</p>
 </div>
 <div id="cleaning-up" class="section level2">
 <h2>Cleaning up</h2>
