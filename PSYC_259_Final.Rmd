@@ -118,5 +118,12 @@ naming conventions. I have purposefully left the important programs in the upstr
 folder in order to keep the directory calling down stream of the programs. 
 
 
-##  Next Header 
+##  Old Habits Die Hard 
+
+In working on this project I realized I was making changes to my program and saving them with my usual method of incrementing the version number and saving it as a new file. It has occurred to me that this was completely unnecessary as both github and OSF will keep up with the changes between the two file even when they have the exact same name. 
+I hope that this can be seen in the github repository where I cleaned up and added some comments to the `Cleaning_Data_for_Sharing` program where I saved another version after the change. I was shocking to me how quickly I did this and without consideration.
+I think this is perhaps a habit that will be hard to shake but I now see how truly beneficial these repositories / programs really are. 
+
+
+
 
