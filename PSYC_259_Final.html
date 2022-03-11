@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hunter B Sturgill" />
 
-<meta name="date" content="2022-03-09" />
+<meta name="date" content="2022-03-11" />
 
 <title>PSYC 259 Final</title>
 
@@ -255,7 +255,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">PSYC 259 Final</h1>
 <h4 class="author">Hunter B Sturgill</h4>
-<h4 class="date">2022-03-09</h4>
+<h4 class="date">2022-03-11</h4>
 
 </div>
 
@@ -266,7 +266,37 @@ div.tocify {
 <div id="open-source" class="section level2">
 <h2>Open Source</h2>
 <p>I have create an OSF repository to help increase transparency and fidelity of my project.</p>
-<p>One of the major issues with my previous technique was that I had all raw data stored as a matrix of numbers. This matrix was accompanied by an extra document that was required to understand what each column represented with respect to the experiment. To fix this I wrote a short MatLab code that converts the raw data matrix into a table with column headers that should prove easy to understand without requiring an extra document or excessive commenting in the code.</p>
+<p>One of the major issues with my previous technique was that I had all raw data stored as a matrix of numbers. This matrix was accompanied by an extra document that was required to understand what each column represented with respect to the experiment. To fix this I wrote a short MatLab program that converts the raw data matrix into a table with column headers that should prove easy to understand without requiring an extra document or excessive commenting in the code.Additionally, this code shows good use of for loop to reduce the possibility of error in copying and pasting many times over.</p>
+<pre><code>data_home= (&quot;G:\Shared drives\Haptic Search Group Winter 2022\Experiment 2 Data_NVP&quot;)
+program_home=( &quot;C:\Users\hunte\OneDrive\Documents\MATLAB&quot; )
+Data=[];
+Data_table=[];
+DS_clean=[];
+max_subjects=100;
+num_of_sub= 0;
+cd(data_home)
+
+for si=1:max_subjects
+    if exist([&#39;Tactile_Search_2109_Experiment_2_Subject_&#39;,num2str(si),&#39;_Block_2.csv&#39;])
+        num_of_sub= num_of_sub +1
+        Data=[Data; csvread([&#39;Tactile_Search_2109_Experiment_2_Subject_&#39;,num2str(si),&#39;_Block_2.csv&#39;])];
+    end
+end
+cd(program_home);
+</code></pre>
+<p>This code also uses and iterative procedure to clean the data file by removing the missing values that are generated. The program that collects this data fills in a preallocated matrix as trials are completed and becasue we only want to analized half of the trials the matrix contains many unfilled rows. When combining each of those files you wind up with huge gaps of data that are all 0.</p>
+<pre><code>for gi = 1:size(Data,1)
+    if Data(gi,1) ~= 0 
+    DS_clean= [DS_clean; Data(gi,:)];
+    end
+end</code></pre>
+<p>Now that the files are compiled and cleaned I want to save the new data as a table. Below is the code for that.</p>
+<pre><code>titles= {&#39;Year&#39;,&#39;Month&#39;,&#39;Day&#39;,&#39;Hour&#39;,&#39;Minute&#39;,&#39;Seconds&#39;,&#39;Subject&#39;,&#39;Experiment&#39;,&#39;Trial&#39;,&#39;Distractor_num&#39;,&#39;Distractor_size&#39;,...
+    &#39;Setup_time(s)&#39;,&#39;Inspection_time(s)&#39;,&#39;Search_time(s)&#39;,&#39;Input_time(s)&#39;,&#39;Accuracy&#39;}
+Data_table = array2table(DS_clean,&quot;VariableNames&quot;,titles)
+writetable(Data_table,&#39;NVP_Clean_Data.csv&#39;)
+</code></pre>
+<p>The entire program can be found on my OSF page for this project.</p>
 </div>
 <div id="cleaning-up" class="section level2">
 <h2>Cleaning up</h2>

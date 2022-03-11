@@ -22,14 +22,56 @@ my project.
 One of the major issues with my previous technique was that I had all raw data 
 stored as a matrix of numbers. This matrix was accompanied by an extra document 
 that was required to understand what each column represented with respect to the
-experiment. To fix this I wrote a short MatLab code that converts the raw data matrix
+experiment. To fix this I wrote a short MatLab program that converts the raw data matrix
 into a table with column headers that should prove easy to understand without 
-requiring an extra document or excessive commenting in the code. 
+requiring an extra document or excessive commenting in the code.Additionally, this 
+code shows good use of for loop to reduce the possibility of error in copying and 
+pasting many times over. 
 
-
-```{r}
 
 ```
+data_home= ("G:\Shared drives\Haptic Search Group Winter 2022\Experiment 2 Data_NVP")
+program_home=( "C:\Users\hunte\OneDrive\Documents\MATLAB" )
+Data=[];
+Data_table=[];
+DS_clean=[];
+max_subjects=100;
+num_of_sub= 0;
+cd(data_home)
+
+for si=1:max_subjects
+    if exist(['Tactile_Search_2109_Experiment_2_Subject_',num2str(si),'_Block_2.csv'])
+        num_of_sub= num_of_sub +1
+        Data=[Data; csvread(['Tactile_Search_2109_Experiment_2_Subject_',num2str(si),'_Block_2.csv'])];
+    end
+end
+cd(program_home);
+
+```
+
+This code also uses and iterative procedure to clean the data file by removing the missing
+values that are generated. The program that collects this data fills in a preallocated matrix
+as trials are completed and becasue we only want to analized half of the trials the matrix contains many unfilled rows. When combining each of those files you wind up with huge gaps of 
+data that are all 0. 
+
+```
+for gi = 1:size(Data,1)
+    if Data(gi,1) ~= 0 
+    DS_clean= [DS_clean; Data(gi,:)];
+    end
+end
+```
+Now that the files are compiled and cleaned I want to save the new data as a table. 
+Below is the code for that. 
+
+```
+titles= {'Year','Month','Day','Hour','Minute','Seconds','Subject','Experiment','Trial','Distractor_num','Distractor_size',...
+    'Setup_time(s)','Inspection_time(s)','Search_time(s)','Input_time(s)','Accuracy'}
+Data_table = array2table(DS_clean,"VariableNames",titles)
+writetable(Data_table,'NVP_Clean_Data.csv')
+
+```
+The entire program can be found on my OSF page for this project. 
 
 ##  Cleaning up
 
