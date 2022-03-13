@@ -109,15 +109,15 @@ by reorganizing my folder and also including the manuscripts in my OSF repositor
 
 Below is a screen shot of my folder for this project.
 
-![Before Cleaning](Images\Haptic_Search_Folder_before.jpg)
+![***Before Cleaning***](Images\Haptic_Search_Folder_before.jpg)
 
 
 
-![During Cleaning ](Images\Haptic_Search_Folder_During.jpg)
+![***During Cleaning*** ](Images\Haptic_Search_Folder_During.jpg)
 
  
 
-![After Cleaning](Images\Haptic_Search_Folder_after.jpg)
+![***After Cleaning***](Images\Haptic_Search_Folder_after.jpg)
 
 As can be seen from the images I have added several new folders with specific 
 naming conventions. I have purposefully left the important programs in the upstream 
