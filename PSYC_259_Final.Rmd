@@ -192,7 +192,9 @@ Now I want to plot the aggregate data and have the parameter that distinguishes 
 # Plot conditional means
 
 ggplot(cond_mean, aes(x=Distractor_size, y= name, color = Distractor_num))+
-  geom_line(aes(group = Distractor_num)) + geom_point()
+  geom_line(aes(group = Distractor_num)) + geom_point(size = 2) + scale_x_continuous(name="Distractor Size(inches)", breaks=seq(0,2,.25)) +
+  scale_y_continuous(name="Search Time(s)", breaks=seq(0,40,5))
+  
 
 ```
 
