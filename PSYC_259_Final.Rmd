@@ -11,6 +11,12 @@ output:
     
 
 ---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(DataExplorer)
+
+```
 # Reproducibility 
 In this section I will show steps I have taken to make my work easier to share
 and increase its reproducibility.
@@ -123,6 +129,41 @@ folder in order to keep the directory calling down stream of the programs.
 In working on this project I realized I was making changes to my program and saving them with my usual method of incrementing the version number and saving it as a new file. It has occurred to me that this was completely unnecessary as both github and OSF will keep up with the changes between the two file even when they have the exact same name. 
 I hope that this can be seen in the github repository where I cleaned up and added some comments to the `Cleaning_Data_for_Sharing` program where I saved another version after the change. I was shocking to me how quickly I did this and without consideration.
 I think this is perhaps a habit that will be hard to shake but I now see how truly beneficial these repositories / programs really are. 
+
+
+##  Exploratory Data Analysis 
+
+In this section I will show some of the things I have learned throughout the course.
+Particularly I was very poor at programming in r. 
+I will read in my newly reformatted data and then plot some graphs that I believe will 
+best show the results of the experiment. 
+
+
+
+Read In no visual preview experiment data that has previously been cleaned. 
+cleaning and reformatting was shown above in section [Open Source](#open-source)
+
+```{r}
+ds <-  read_csv("Cleaning Data for Sharing/NVP_Clean_Data.csv")
+glimpse(ds)
+```
+
+Now as part of exploratory analysis I want to count up unique participant Id's 
+
+```{r}
+length(unique(ds$Subject))
+
+```
+
+
+Let's make a quick scatter plot to see what the data look like. 
+
+```{r}
+ggplot(ds, aes(x = Distractor_size, y = `Search_time(s)`)) + 
+  geom_point()
+
+```
+
 
 
 
