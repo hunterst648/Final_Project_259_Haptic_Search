@@ -186,5 +186,13 @@ cond_mean <- ds %>%  group_by(Distractor_num, Distractor_size) %>%
 kable(cond_mean) 
 ```
 
+Now I want to plot the aggregate data and have the parameter that distinguishes the curves be the number of distractors in the search. 
 
+```{r}
+# Plot conditional means
+
+ggplot(cond_mean, aes(x=Distractor_size, y= name, color = Distractor_num))+
+  geom_line(aes(group = Distractor_num)) + geom_point()
+
+```
 
