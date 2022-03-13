@@ -25,7 +25,7 @@ clc
 
 data_home= ("G:\Shared drives\Haptic Search Group Winter 2022\Experiment 2 Data_NVP")
 program_home=( "C:\Users\hunte\OneDrive\Documents\MATLAB" )
-Project_home = ("C:\Users\User\Documents\Haptic Search\Final_Project_259_Haptic_Search\Cleaning Data for Sharing")
+Project_home = (""C:\Users\User\Documents\Haptic Search\Final_Project_259_Haptic_Search\Cleaning Data for Sharing\Cleanin"
 Data=[];
 Data_table=[];
 DS_clean=[];
@@ -48,7 +48,6 @@ end
 titles= {'Year','Month','Day','Hour','Minute','Seconds','Subject','Experiment','Trial','Distractor_num','Distractor_size',...
     'Setup_time(s)','Inspection_time(s)','Search_time(s)','Input_time(s)','Accuracy'}
 Data_table = array2table(DS_clean,"VariableNames",titles)
-cd(Project_home);
 writetable(Data_table,'NVP_Clean_Data.csv')
 
 %%  ============== ===========  Haptic VP Data  ===============================
@@ -76,7 +75,6 @@ for gi = 1:size(Data,1)
 end
 
 Data_table = array2table(DS_clean,"VariableNames",titles)
-cd(Project_home);
 writetable(Data_table,'VP_Clean_Data.csv')
    
 
