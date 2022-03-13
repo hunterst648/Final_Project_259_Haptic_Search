@@ -28,12 +28,3 @@ ggplot(cond_mean, aes(x=Distractor_size, y= name, color = Distractor_num))+
 
 
 
-
-
-cond_mean %>% ggplot(aes(x = Distractor_size, y = name, color = Distractor_num)) + 
-  stat_summary(fun.data = mean_se, geom = "point", size = 2, position = position_dodge(.2)) +
-  stat_summary(fun.data = mean_se, geom = "errorbar", size =.25, position = position_dodge(.2)) +
-  geom_line()
-
-
-cond_mean <- cond_mean %>% group_by(Distractor_num)
