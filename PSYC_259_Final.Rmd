@@ -15,11 +15,21 @@ output:
 ```{r setup, include=FALSE}
 library(tidyverse)
 library(DataExplorer)
-
+library(knitr)
 ```
 # Reproducibility 
-In this section I will show steps I have taken to make my work easier to share
-and increase its reproducibility.
+This is the primary concern in this Final Project. I have put considerable effort into
+cleaning up my data for sharing and creating an OSF repository that I will be able to use
+throughout the course of this project. 
+It will be beneficial to my career as a graduate student as this Haptic Search project
+is my primary study of interest and will be the work I plan to build my career on. 
+Having an open source repository will lay a good foundation for sharing my work with reviewers and other scientist who are interested. 
+
+Although the steps taken for this final project will not be all of the cleaning and 
+organizing I will need to do, it is my hope that this will be the start of a better, more efficient way of working.
+
+In the sections ahead, I will highlight some of the steps I have taken to cut down on mistakes,
+improve efficiency by using repositories, and continue to develop file organization and naming conventions that are better suited for collaboration with others. 
 
 ##  Open Source 
 I have create an OSF repository to help increase transparency and fidelity of 
@@ -143,14 +153,14 @@ best show the results of the experiment.
 Read In no visual preview experiment data that has previously been cleaned. 
 cleaning and reformatting was shown above in section [Open Source](#open-source)
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 ds <-  read_csv("Cleaning Data for Sharing/NVP_Clean_Data.csv")
 glimpse(ds)
 ```
 
 Now as part of exploratory analysis I want to count up unique participant Id's 
 
-```{r}
+```{r message=FALSE}
 length(unique(ds$Subject))
 
 ```
@@ -158,13 +168,23 @@ length(unique(ds$Subject))
 
 Let's make a quick scatter plot to see what the data look like. 
 
-```{r}
+```{r warning=FALSE, message=FALSE}
 ggplot(ds, aes(x = Distractor_size, y = `Search_time(s)`)) + 
   geom_point()
 
 ```
 
+The previous graph is nice and give a good idea of the distribution of search times for each of the 6 different distractor lengths. However, this aggregates over the number of distractors in the search set. I would like to plot a line graph that will show aggregate data for each of the `r 3*6` conditions.  
 
+
+Start by getting the means for each of the conditions. I will group by number of distractors first, so 4, 6, or 8. Then in each of those groups I should have a grouping by the length of the distractors[ .25" .5" .75' 1.25" 1.5" 1.75" ] where the target is always 1"
+
+```{r message=FALSE}
+# Get conditional means 
+cond_mean <- ds %>%  group_by(Distractor_num, Distractor_size) %>% 
+  summarise_at(vars(`Search_time(s)`), list(name = mean))
+kable(cond_mean) 
+```
 
 
 
