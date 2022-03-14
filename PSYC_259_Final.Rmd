@@ -259,7 +259,7 @@ Haptic_plots(ds,1)
 ```
 
 
-No again for search times. 
+Now again for search times. 
 
 ```{r warning=FALSE,message=FALSE}
 Haptic_plots(ds,2)
