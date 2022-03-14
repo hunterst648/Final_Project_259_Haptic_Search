@@ -227,7 +227,7 @@ Haptic_plots <- function(ds,DV){
   
   p2 <-  ggplot(cond_mean, aes(x=Distractor_size, y= name, color = Distractor_num))+
   geom_line(aes(group = Distractor_num)) + geom_point(size = 2) +   scale_x_continuous(name="Distractor Size(inches)", breaks=seq(0,2,.25)) +
-  scale_y_continuous(name="Accuracy", breaks=seq(0,40,5))
+  scale_y_continuous(name="Accuracy", breaks=seq(.5,1,.05))
   return(p2)
   }
   else {
