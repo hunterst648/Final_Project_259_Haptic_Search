@@ -11,7 +11,7 @@
 
 <meta name="author" content="Hunter B Sturgill" />
 
-<meta name="date" content="2022-03-13" />
+<meta name="date" content="2022-03-14" />
 
 <title>PSYC 259 Final</title>
 
@@ -255,7 +255,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">PSYC 259 Final</h1>
 <h4 class="author">Hunter B Sturgill</h4>
-<h4 class="date">2022-03-13</h4>
+<h4 class="date">2022-03-14</h4>
 
 </div>
 
@@ -298,6 +298,7 @@ end
 cd(program_home);
 </code></pre>
 <p>This code also uses and iterative procedure to clean the data file by removing the missing values that are generated. The program that collects this data fills in a pre-allocated matrix as trials are completed.The Matrix is originally filled with all 0’s and then saves after each trial is completed. Since I only analyzed half of the data there are large groups of 0’s in the file that compiled each subjects’ data. The code above read in all 36 trials for each subject and put them all together but 18 of those 36 trials had yet to be completed. Thus the final data set needs to be cleaned of those 18 rows of 0’s for each subject.</p>
+<p>Raw data can be found at <a href="https://osf.io/t23g4/?view_only=8540c0350e67422a9d49afd39c901c63">OSF</a> under <code>Experiments</code>, <code>NVP_Experiment</code>, <code>Data</code>, <code>Raw Data Files</code>.</p>
 <p>Below is the code to clean out the extra 0’s</p>
 <pre><code>for gi = 1:size(Data,1)
     if Data(gi,1) ~= 0 
