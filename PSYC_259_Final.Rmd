@@ -35,22 +35,23 @@ In addition to these changes, I have briefly described learning that took place 
 Here's to you both for a life changed by your efforts in this course! 
 
 ##  Open Source 
-I have create an OSF repository to help increase transparency and fidelity of 
+I have created an OSF repository to help increase transparency and fidelity of 
 my project. 
 
-One of the major issues with my previous technique was that I had all raw data 
+One of the major issues with my previous technique was that I had all of the raw data 
 stored as a matrix of numbers. This matrix was accompanied by an extra document 
 that was required to understand what each column represented with respect to the
 experiment. To fix this I wrote a short MatLab program that converts the raw data matrix
 into a table with column headers that should prove easy to understand without 
 requiring an extra document or excessive commenting in the code.Additionally, this 
-code shows good use of the for loop to reduce the possibility of error in copying and 
+code shows good use of the `for` loop to reduce the possibility of error in copying and 
 pasting many times over. 
 
 I also discovered how to read in data from cloud storage, which I did not know how
 to do until taking this course. This will greatly reduce my chances of error when shuffling 
-data from place to place and will allow me to be able to write programs that are easily shared. 
-For example previous data analysis programs have required multiple `data_home` variables for each of the collaborators on the project. It sources the location of the data on each machine. This will no longer be necessary on future work. 
+data from place to place and will allow me to be able to write programs that are better for sharing. 
+
+For example, previous data analysis programs have required multiple `data_home` variables for each of the collaborators on the project. It sources the directory for the data on each machine. This will no longer be necessary on future work. 
 
 An example from a previous experiment below. 
 ```
@@ -62,7 +63,7 @@ cd(ProgramHome)
 DataHome=["C:\Users\User\Documents\Pacing Experiment\Data Experiment 3\All_Data"] %Experiment 3
 cd(DataHome)
 ```
-Switching directories can be eliminated if each of us are using the same repository instead of just downloading all of the data 
+Switching directories can be eliminated if each of us are using the same repository instead of just downloading all of the data to our personal computers.
 
 
 Below is code for reading in the data for cleaning. Note that the variable `data_home` pulls from a google drive where data was stored and anyone who uses this program need not create a new directory to find the data. 
@@ -90,10 +91,15 @@ cd(program_home);
 
 This code also uses and iterative procedure to clean the data file by removing the missing
 values that are generated. The program that collects this data fills in a pre-allocated matrix
-as trials are completed.The Matrix is originally filled with all 0's and then saves after each trial is completed. Since I only analyzed half of the data there are large groups of 0's in the file that compiled each subjects' data. The code above read in all 36 trials for each subject and put them all together but 18 of those 36 trials had yet to be completed. Thus the final data set needs to be cleaned of those 18 rows of 0's for each subject. 
+as trials are completed.The Matrix is originally filled with all 0's and then saves after each trial is completed.
+Since I only analyzed half of the data there are large groups of 0's in the files of each subjects' data. The code above read in all 36 trials for each subject and put them all together but 18 of those 36 trials had yet to be completed. Thus the final data set needs to be cleaned of those 18 rows of 0's for each subject. 
 
 Raw data can be found at [OSF](https://osf.io/t23g4/?view_only=8540c0350e67422a9d49afd39c901c63) under `Experiments`,
 `NVP_Experiment`, `Data`, `Raw Data Files`.
+
+A screen shot for convienience 
+
+![***Raw Data From OSF*** ](Images\Raw_Data_ScreenShot.jpg)
 
 Below is the code to clean out the extra 0's
 
@@ -152,15 +158,15 @@ I think this is perhaps a habit that will be hard to shake but I now see how tru
 ##  Exploratory Data Analysis 
 
 In this section I will show some of the things I have learned throughout the course.
-Particularly, I was very poor at programming in r prior to taking this course, now I have both produced an html markdown file and a graph that could be used in future talks. I would not have considered doing either of these things 10 weeks ago. 
+Particularly, I was very poor at programming in r prior to taking this course, now I have produced an html markdown file, a graph that could be used in future talks, and a function that can be called to produce these same graphs with future data. I would not have considered doing any of these things in r 10 weeks ago. 
 
-
+### Coding Graphs
 I will read in my newly reformatted data and then plot some graphs that I believe will 
 best show the results of the experiment. 
 
 
 
-Read In no visual preview experiment data that has previously been cleaned. 
+Read In No Visual Preview experiment data that has previously been cleaned. 
 cleaning and reformatting was shown above in section [Open Source](#open-source)
 
 
@@ -185,10 +191,10 @@ ggplot(ds, aes(x = Distractor_size, y = `Search_time(s)`)) +
 
 ```
 
-The previous graph is nice and give a good idea of the distribution of search times for each of the 6 different distractor lengths. However, this aggregates over the number of distractors in the search set. I would like to plot a line graph that will show aggregate data for each of the `r 3*6` conditions.  
+The previous graph is nice and gives a good idea of the distribution of search times for each of the 6 different distractor lengths. However, this aggregates over the number of distractors in the search set. I would like to plot a line graph that will show aggregate data for each of the `r 3*6` conditions.  
 
 
-Start by getting the means for each of the conditions. I will group by number of distractors first, so 4, 6, or 8. Then in each of those groups I should have a grouping by the length of the distractors[ .25" .5" .75' 1.25" 1.5" 1.75" ] where the target is always 1"
+Start by getting the means for each of the conditions. I will group by number of distractors first, [ 4, 6, or 8 ]. Then in each of those groups I should be grouping by the length of the distractors[ .25" .5" .75' 1.25" 1.5" 1.75" ] where the target is always 1".
 
 ```{r message=FALSE}
 # Get conditional means 
@@ -212,8 +218,8 @@ ggplot(cond_mean, aes(x=Distractor_size, y= name, color = Distractor_num))+
 
 ##  Writing a Function  
 
-Now that I have a nice graph for my search times I want to produce a similar graph with the accuracy data. Considering that I will be making this graph again for the next experiment and perhaps many more, I want to make a function that will produce this same graph for both accuracy and search time.
-I will start with an argument that asks for the data set, this will allow me to keep the experiments straight. 
+Now that I have a nice graph for my search times. I want to produce a similar graph with the accuracy data. Considering that I will be making this graph again for the next experiment and perhaps many more, I want to make a function that will produce this same graph for both accuracy and search times.
+I will start with an argument that asks for the data set, this will allow me to distinguish between the experiments. 
 Then the function will call an argument that specifies which type of graph to create, 1 for accuracy and 2 for search times. I know this is essentially hard coding but for my skill level I will stick with this convention for now. Additionally, it could be the case that in the future the range for my y axis might need adjusted and thus the function will need amended but for the time being I feel these scales produce the best looking graphs.  
 
 
