@@ -209,9 +209,12 @@ ggplot(cond_mean, aes(x=Distractor_size, y= name, color = Distractor_num))+
 
 ```
 
-Now that I have a nice graph for my search times I want to produce a similar graph with the accuracy data. Considering that I will be making this graph again for the next experiment and perhaps many more I want to make a function that will produce this same graph for both accuracy and search time
+
+##  Writing a Function  
+
+Now that I have a nice graph for my search times I want to produce a similar graph with the accuracy data. Considering that I will be making this graph again for the next experiment and perhaps many more, I want to make a function that will produce this same graph for both accuracy and search time.
 I will start with an argument that asks for the data set, this will allow me to keep the experiments straight. 
-Then function will call an argument that specifies which type of graph to create, 1 for accuracy and 2 for search times. I know this is essentially hard coding but for my skill level I will stick with this convention for now. 
+Then the function will call an argument that specifies which type of graph to create, 1 for accuracy and 2 for search times. I know this is essentially hard coding but for my skill level I will stick with this convention for now. Additionally, it could be the case that in the future the range for my y axis might need adjusted and thus the function will need amended but for the time being I feel these scales produce the best looking graphs.  
 
 
 Start with the function.
