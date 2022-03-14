@@ -88,6 +88,9 @@ This code also uses and iterative procedure to clean the data file by removing t
 values that are generated. The program that collects this data fills in a pre-allocated matrix
 as trials are completed.The Matrix is originally filled with all 0's and then saves after each trial is completed. Since I only analyzed half of the data there are large groups of 0's in the file that compiled each subjects' data. The code above read in all 36 trials for each subject and put them all together but 18 of those 36 trials had yet to be completed. Thus the final data set needs to be cleaned of those 18 rows of 0's for each subject. 
 
+Raw data can be found at [OSF](https://osf.io/t23g4/?view_only=8540c0350e67422a9d49afd39c901c63) under `Experiments`,
+`NVP_Experiment`, `Data`, `Raw Data Files`.
+
 Below is the code to clean out the extra 0's
 
 ```
