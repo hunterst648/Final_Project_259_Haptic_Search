@@ -31,6 +31,9 @@ organizing I will need to do, it is my hope that this will be the start of a bet
 In the sections ahead, I will highlight some of the steps I have taken to cut down on mistakes,
 improve efficiency by using repositories, and continue to develop file organization and naming conventions that are better suited for collaboration with others. 
 
+In addition to these changes, I have briefly described learning that took place en vivo during the course of working on this project. It's not my belief that this adds to the project in any way but instead highlights a breakthrough that took place for me while working on this project and exemplifies the usefulness of a final project of this format. 
+Here's to you both for a life changed by your efforts in this course! 
+
 ##  Open Source 
 I have create an OSF repository to help increase transparency and fidelity of 
 my project. 
@@ -46,8 +49,8 @@ pasting many times over.
 
 I also discovered how to read in data from cloud storage, which I did not know how
 to do until taking this course. This will greatly reduce my chances of error when shuffling 
-data from place to place and will allow me to be able to write programs that are more easily shared. 
-For example previous data analysis programs have required multiple `data_home` variables for each of the collaborators on the project 
+data from place to place and will allow me to be able to write programs that are easily shared. 
+For example previous data analysis programs have required multiple `data_home` variables for each of the collaborators on the project. It sources the location of the data on each machine. This will no longer be necessary on future work. 
 
 An example from a previous experiment below. 
 ```
@@ -62,7 +65,8 @@ cd(DataHome)
 Switching directories can be eliminated if each of us are using the same repository instead of just downloading all of the data 
 
 
-Below is code for reading in the data for cleaning
+Below is code for reading in the data for cleaning. Note that the variable `data_home` pulls from a google drive where data was stored and anyone who uses this program need not create a new directory to find the data. 
+*Of course there are some prior steps that need to be taken but are omitted because they do not contribute to the purposes of this project.* 
 
 ```
 data_home= ("G:\Shared drives\Haptic Search Group Winter 2022\Experiment 2 Data_NVP")
@@ -101,7 +105,7 @@ for gi = 1:size(Data,1)
 end
 ```
 Now that the files are compiled and cleaned I want to save the new data as a table. 
-Below is the code for that. 
+Below is the code for that.Each column is given a descriptive header. I chose to save the file as a .csv as I feel it is the most universal format and can be used by many analysis programs. 
 
 ```
 titles= {'Year','Month','Day','Hour','Minute','Seconds','Subject','Experiment','Trial','Distractor_num','Distractor_size',...
@@ -111,7 +115,7 @@ writetable(Data_table,'NVP_Clean_Data.csv')
 
 ```
 The entire program can be found on my OSF page for this project [Haptic Search](https://osf.io/t23g4/?view_only=8540c0350e67422a9d49afd39c901c63)
-in the programs folder. 
+in the `programs` folder. 
 
 
 ##  Cleaning up
@@ -119,9 +123,9 @@ in the programs folder.
 One of the major issues I have noticed with my work is poor folder and file organization. 
 There is a substantial amount of time wasted in attempting to find a program, some data, or 
 the most recent version of a manuscript. I have take some steps to mitigate this issue 
-by reorganizing my folder and also including the manuscripts in my OSF repository. 
+by reorganizing my folder and also including the most important items in my OSF repository. 
 
-Below is a screen shot of my folder for this project.
+Below is a screen shot of my folder for this project, on my personal computer.
 
 ![***Before Cleaning***](Images\Haptic_Search_Folder_before.jpg)
 
@@ -173,7 +177,7 @@ length(unique(ds$Subject))
 ```
 
 
-Let's make a quick scatter plot to see what the data look like. 
+Let's make a quick scatter plot to see what the data look like. I want to plot search times as a function of distractor size.  
 
 ```{r warning=FALSE, message=FALSE}
 ggplot(ds, aes(x = Distractor_size, y = `Search_time(s)`)) + 
@@ -205,3 +209,56 @@ ggplot(cond_mean, aes(x=Distractor_size, y= name, color = Distractor_num))+
 
 ```
 
+Now that I have a nice graph for my search times I want to produce a similar graph with the accuracy data. Considering that I will be making this graph again for the next experiment and perhaps many more I want to make a function that will produce this same graph for both accuracy and search time
+I will start with an argument that asks for the data set, this will allow me to keep the experiments straight. 
+Then function will call an argument that specifies which type of graph to create, 1 for accuracy and 2 for search times. I know this is essentially hard coding but for my skill level I will stick with this convention for now. 
+
+
+Start with the function.
+
+```{r message=FALSE,warning=FALSE}
+
+Haptic_plots <- function(ds,DV){
+  dep_var <- DV
+  if (dep_var == 1) {
+    cond_mean <- ds %>%  group_by(Distractor_num, Distractor_size) %>% 
+    summarise_at(vars(Accuracy), list(name = mean))
+    cond_mean %>% group_by(Distractor_num)
+  
+  p2 <-  ggplot(cond_mean, aes(x=Distractor_size, y= name, color = Distractor_num))+
+  geom_line(aes(group = Distractor_num)) + geom_point(size = 2) +   scale_x_continuous(name="Distractor Size(inches)", breaks=seq(0,2,.25)) +
+  scale_y_continuous(name="Accuracy", breaks=seq(0,40,5))
+  return(p2)
+  }
+  else {
+    cond_mean <- ds %>%  group_by(Distractor_num, Distractor_size) %>% 
+    summarise_at(vars(`Search_time(s)`), list(name = mean))
+  
+    cond_mean %>% group_by(Distractor_num)
+  
+    p1 <- ggplot(cond_mean, aes(x=Distractor_size, y= name, color = Distractor_num))+
+  geom_line(aes(group = Distractor_num)) + geom_point(size = 2) + scale_x_continuous(name="Distractor Size(inches)", breaks=seq(0,2,.25)) +
+  scale_y_continuous(name="Search Time(s)", breaks=seq(0,40,5))
+  
+  return(p1)
+  }
+}
+
+
+```
+
+Now let's test the function 
+
+Test accuracy first. 
+```{r warning=FALSE,message=FALSE}
+Haptic_plots(ds,1)
+
+```
+
+
+No again for search times. 
+
+```{r warning=FALSE,message=FALSE}
+Haptic_plots(ds,2)
+
+```
